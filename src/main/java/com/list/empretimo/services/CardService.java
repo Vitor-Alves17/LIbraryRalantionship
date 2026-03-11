@@ -14,8 +14,8 @@ public class CardService {
         this.cardRepo = cardRepo;
     }
 
-    public String newWallet(CardRequestDTO dto){
-        CardLibrary wallet = new CardLibrary(dto);
+    public String newCard(CardRequestDTO dto){
+        CardLibrary card = new CardLibrary(dto);
         return "Card created sucefully";
     }
 }

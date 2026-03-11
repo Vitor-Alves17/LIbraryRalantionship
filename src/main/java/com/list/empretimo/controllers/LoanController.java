@@ -1,7 +1,10 @@
 package com.list.empretimo.controllers;
 
+import com.list.empretimo.responsesDTO.LoanResponseDTO;
 import com.list.empretimo.responsesDTO.UserResponseDTO;
+import com.list.empretimo.resquestsDTO.LoanRequestDTO;
 import com.list.empretimo.resquestsDTO.UserRequestDTO;
+import com.list.empretimo.services.LoanService;
 import com.list.empretimo.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -14,26 +17,26 @@ import java.util.List;
 @RestController
 public class LoanController {
 
-    private final UserService userService;
+    private final LoanService loanService;
 
-    public LoanController(UserService userService) {
-        this.userService = userService;
+    public LoanController(LoanService loanService) {
+        this.loanService = loanService;
     }
 
-//    @GetMapping("/getusers")
-//    public List<UserResponseDTO> getUsers() {
-//        return userService.getUser();
-//    }
-    @PostMapping("/user/cadatrar")
-    public ResponseEntity<?> addUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.newUser(userRequestDTO));
+    @GetMapping("/getloan/{id}")
+    public LoanResponseDTO getLoan(@PathVariable long id) {
+        return loanService.getLoanById(id);
     }
-    @PutMapping("/user/update/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable long id, @Valid @RequestBody UserRequestDTO userRequestDTO) {
-        return ResponseEntity.ok(userService.updateUser(userRequestDTO, id));
+    @PostMapping("/loan/new/{user_id}")
+    public ResponseEntity<?> addLoan(@Valid @RequestBody LoanRequestDTO loanRequestDTO, @PathVariable long user_id) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(loanService.newLoan(loanRequestDTO, user_id));
     }
-    @DeleteMapping("user/delete/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable int id) {
-        return ResponseEntity.ok(userService.deleteUserById(id));
+    @PutMapping("/loan/update/{id}")
+    public ResponseEntity<?> updateLoan(@PathVariable long id, @Valid @RequestBody LoanRequestDTO loanRequestDTO) {
+        return ResponseEntity.ok(loanService.updateReturnDate(loanRequestDTO, id));
+    }
+    @DeleteMapping("/loan/delete/{id}")
+    public ResponseEntity<?> deleteLoan(@PathVariable int id) {
+        return ResponseEntity.ok(loanService.deleteLoanById(id));
     }
 }

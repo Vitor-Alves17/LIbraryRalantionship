@@ -21,7 +21,7 @@ public class UserService {
     public String newUser(UserRequestDTO dto){
         User user = new User(dto);
         userRepository.save(user);
-        return "Loan created sucefully";
+        return "User created sucefully";
 
     }
     public UserResponseDTO getUserById(long id){
@@ -41,9 +41,9 @@ public class UserService {
     public String deleteUserById(long id){
         if (userRepository.existsById(id)){
             userRepository.deleteById(id);
-            return "Loan deleted sucefully";
+            return "User deleted sucefully";
         }else {
-            return "Loan not found";
+            return "User not found";
         }
     }
 }
