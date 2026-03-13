@@ -17,8 +17,8 @@ public class CardController {
         this.cardService = cardService;
     }
 
-    @PostMapping("/card/new")
-    public ResponseEntity<?> addCard(@Valid @RequestBody CardRequestDTO cardRequestDTO){
-        return ResponseEntity.status(HttpStatus.CREATED).body(cardService.newCard(cardRequestDTO));
+    @PostMapping("/card/new/{user_id}")
+    public ResponseEntity<?> addCard(@Valid @RequestBody CardRequestDTO cardRequestDTO, @PathVariable long user_id){
+        return ResponseEntity.status(HttpStatus.CREATED).body(cardService.newCard(cardRequestDTO, user_id));
     }
 }
