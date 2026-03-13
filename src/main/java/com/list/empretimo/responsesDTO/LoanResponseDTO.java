@@ -11,11 +11,11 @@ public class LoanResponseDTO {
 
     private LocalDate lonDate;
     private LocalDate returnDate;
-    private User user;
+    private UserResponseDTO user;
 
-    public LoanResponseDTO(Loan loan) {
+    public LoanResponseDTO(Loan loan, UserResponseDTO dto) {
         this.lonDate = loan.getLonDate();
         this.returnDate = loan.getReturnDate();
-        this.user = loan.getUser();
+        this.user = dto;
     }
 }

@@ -14,6 +14,6 @@ import lombok.Setter;
 public class UserRequestDTO {
 
     private String name;
-    @NotBlank
+    @NotBlank(message = "You must to add a email")
     private String email;
 }

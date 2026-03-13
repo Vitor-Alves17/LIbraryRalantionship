@@ -5,6 +5,7 @@ import com.list.empretimo.entities.User;
 import com.list.empretimo.repositories.LoanRepository;
 import com.list.empretimo.repositories.UserRepository;
 import com.list.empretimo.responsesDTO.LoanResponseDTO;
+import com.list.empretimo.responsesDTO.UserResponseDTO;
 import com.list.empretimo.resquestsDTO.LoanRequestDTO;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,8 @@ public class LoanService {
     }
     public LoanResponseDTO getLoanById(long id){
         Loan loan = loanRepository.findById(id).orElseThrow(() -> new RuntimeException("User o found"));
-        LoanResponseDTO loanRes = new LoanResponseDTO(loan);
+        UserResponseDTO userR = new UserResponseDTO(loan.getUser());
+        LoanResponseDTO loanRes = new LoanResponseDTO(loan, userR);
         return loanRes;
     }
 
